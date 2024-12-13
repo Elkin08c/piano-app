@@ -11,7 +11,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
 
   const handleLogin = () => {
     // Aquí puedes agregar la lógica de autenticación
-    if (username === 'user' && password === 'password') {
+    if (username === 'Elkin_s8' && password === 'elkin200508!') {
       onLogin();
     } else {
       alert('Invalid credentials');
