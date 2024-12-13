@@ -1,5 +1,5 @@
 {
-  "name": "piano-app",
+  "name": "my-piano",
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
@@ -9,10 +9,17 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "expo": "~52.0.18",
+    "@expo/metro-runtime": "~4.0.0",
+    "expo": "~52.0.11",
+    "expo-audio": "~0.3.0",
+    "expo-av": "~15.0.1",
     "expo-status-bar": "~2.0.0",
     "react": "18.3.1",
-    "react-native": "0.76.5"
+    "react-dom": "18.3.1",
+    "react-native": "0.76.3",
+    "react-native-web": "~0.19.13",
+    "tone": "^15.0.4",
+    "expo-screen-orientation": "~8.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
