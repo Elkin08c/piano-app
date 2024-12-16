@@ -12,7 +12,7 @@ interface KeyboardProps {
 const Keyboard: React.FC<KeyboardProps> = ({ onLogout }) => {
   return (
     <View style={styles.container}>
-      <Button title="Logout" onPress={onLogout} />
+      <Button title="Return" onPress={onLogout} />
       <View style={styles.keyboard}>
         {whiteNotes.map((note, index) => (
           <View key={note} style={styles.keyContainer}>
