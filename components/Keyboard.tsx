@@ -1,18 +1,23 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Button } from "react-native";
 import PianoKey from './PianoKey';
 
 const whiteNotes = ["C4", "D4", "E4", "F4"];
 const blackNotes = ["C#4", "D#4", "F#4", "G#4"];
 
-export default function Keyboard() {
+interface KeyboardProps {
+  onLogout: () => void;
+}
+
+const Keyboard: React.FC<KeyboardProps> = ({ onLogout }) => {
   return (
-    <View style={styles.keyboardContainer}>
+    <View style={styles.container}>
+      <Button title="Logout" onPress={onLogout} />
       <View style={styles.keyboard}>
         {whiteNotes.map((note, index) => (
           <View key={note} style={styles.keyContainer}>
             <PianoKey note={note} color="white" />
-            {index < blackNotes.length && (
+            {blackNotes[index] && (
               <View style={styles.blackKeyContainer}>
                 <PianoKey note={blackNotes[index]} color="black" />
               </View>
@@ -22,28 +27,37 @@ export default function Keyboard() {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  keyboardContainer: {
+  container: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 50,
+    padding: 16,
+    backgroundColor: '#f5f5f5',
   },
   keyboard: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'flex-end',
+    padding: 16,
+    backgroundColor: '#f5f5f5',
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
   },
   keyContainer: {
     position: 'relative',
   },
   blackKeyContainer: {
     position: 'absolute',
-    top: 0, 
+    left: 45,
     zIndex: 1,
-    width: 40, 
-    height: 120, 
-    marginLeft: 35, 
   },
 });
+
+export default Keyboard;
