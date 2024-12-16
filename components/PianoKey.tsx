@@ -2,7 +2,6 @@ import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import { Audio, AVPlaybackStatusSuccess } from "expo-av";
 
-// Mapeo explícito de las notas a sus archivos de sonido
 const soundMapping: { [key: string]: any } = {
   C4: require("../assets/sounds/C4.mp3"),
   D4: require("../assets/sounds/D4.mp3"),
@@ -22,12 +21,10 @@ interface PianoKeyProps {
 const PianoKey: React.FC<PianoKeyProps> = ({ note, color }) => {
   const playSound = async () => {
     try {
-      // Usar el mapeo para obtener el archivo de sonido correspondiente
       const { sound } = await Audio.Sound.createAsync(soundMapping[note]);
 
       await sound.playAsync();
 
-      // Liberar recursos después de que el sonido termine
       sound.setOnPlaybackStatusUpdate((status) => {
         if (status && (status as AVPlaybackStatusSuccess).didJustFinish) {
           sound.unloadAsync();
@@ -43,49 +40,55 @@ const PianoKey: React.FC<PianoKeyProps> = ({ note, color }) => {
       style={[styles.key, color === "white" ? styles.whiteKey : styles.blackKey]}
       onPress={playSound}
     >
-      <Text style={[styles.text, color === "white" ? styles.blackText : styles.whiteText]}>{note}</Text>
+      <Text style={[styles.text, color === "white" ? styles.whiteText : styles.blackText]}>
+        {note}
+      </Text>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   key: {
-    width: 60,
-    height: 200,
-    margin: 2,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 5,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
     elevation: 5,
   },
   whiteKey: {
-    backgroundColor: "#fff",
-    borderColor: "#000",
+    width: 60,
+    height: 200,
+    backgroundColor: "#ffffff",
+    borderColor: "#d1d1d1", 
     borderWidth: 1,
+    margin: 2,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
   },
   blackKey: {
-    backgroundColor: "#000",
-    borderColor: "#000",
-    borderWidth: 1,
-    height: 120,
     width: 40,
+    height: 140, 
+    backgroundColor: "#333333",
+    borderRadius: 5,
+    position: "absolute",
+    zIndex: 1,
     marginLeft: -20,
     marginRight: -20,
-    zIndex: 1,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
   },
   text: {
     fontSize: 16,
     fontWeight: "bold",
   },
-  blackText: {
-    color: "#000",
-  },
   whiteText: {
-    color: "#fff",
+    color: "#000000", 
+  },
+  blackText: {
+    color: "#ffffff",
   },
 });
 

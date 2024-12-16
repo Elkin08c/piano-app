@@ -5,6 +5,8 @@ import Keyboard from './components/Keyboard';
 import LoginScreen from './components/LoginScreen';
 import * as ScreenOrientation from 'expo-screen-orientation';
 
+
+
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
